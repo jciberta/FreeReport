@@ -72,11 +72,16 @@ begin
     s := Copy(s, 2, Length(s) - 2);
 end;
 
+// Delphi 7 uses single 8 bit characters for String data type.
+// Delphi XE7 uses Unicode 16 bits characters for String data type.
 procedure frReadMemo(Stream: TStream; l: TStrings);
 var
   s: String;
   b: Byte;
   n: Word;
+{$IFDEF DelphiXE7}
+  j: Integer;
+{$ENDIF}
 begin
   l.Clear;
   Stream.Read(n, 2);
@@ -84,7 +89,12 @@ begin
     repeat
       Stream.Read(n, 2);
       SetLength(s, n);
+{$IFDEF DelphiXE7}
+      for j := 1 to n do
+        Stream.Read(s[j], 2);
+{$ELSE}
       Stream.Read(s[1], n);
+{$ENDIF}
       l.Add(s);
       Stream.Read(b, 1);
     until b = 0
@@ -94,6 +104,9 @@ end;
 
 procedure frWriteMemo(Stream: TStream; l: TStrings);
 var
+{$IFDEF DelphiXE7}
+  j: Integer;
+{$ENDIF}
   s: String;
   i: Integer;
   n: Word;
@@ -106,7 +119,12 @@ begin
     s := l[i];
     n := Length(s);
     Stream.Write(n, 2);
+{$IFDEF DelphiXE7}
+    for j := 1 to n do
+      Stream.Write(s[j], 2);
+{$ELSE}
     Stream.Write(s[1], n);
+{$ENDIF}
     b := 13;
     if i <> l.Count - 1 then Stream.Write(b, 1);
   end;
