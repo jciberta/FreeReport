@@ -908,7 +908,11 @@ begin
       btGroupHeader, btGroupFooter:
         Res := CurPage.Bands[btMasterData].DataSet;
       btDetailData, btDetailFooter:
-        Res := CurPage.Bands[btDetailData].DataSet;
+        // FIXED
+        // It always returns the DataSet from the first same-type band, in case
+        // you want to use 2 or more details at the same level.
+        //Res := CurPage.Bands[btDetailData].DataSet;
+        Res := TfrBand(CurBand).DataSet;		
       btSubDetailData, btSubDetailFooter:
         Res := CurPage.Bands[btSubDetailData].DataSet;
       btCrossData, btCrossFooter:
