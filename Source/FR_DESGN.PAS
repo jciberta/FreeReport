@@ -2813,7 +2813,11 @@ begin
            s := E1.Text;
            for j := 1 to Length(s) do
              if s[j] in ['.', ','] then
+{$IFDEF DelphiXE7}
+               s[j] := FormatSettings.DecimalSeparator;
+{$ELSE}
                s[j] := DecimalSeparator;
+{$ENDIF}
            FrameWidth := StrToFloat(s);
            if t is TfrLineView then
              LastLineWidth := FrameWidth else

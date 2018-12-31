@@ -27,7 +27,12 @@ uses
 type
   TfrBookmark =
 {$IFDEF IBO} type string;
-{$ELSE} type TBookmark;
+{$ELSE}
+    {$IFDEF DelphiXE7}
+        TBookmark;
+    {$ELSE}
+        type TBookmark;
+    {$ENDIF}
 {$ENDIF}
 
   TfrTDataSet =

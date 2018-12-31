@@ -16,7 +16,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FR_Class, ExtCtrls, TeeProcs, TeEngine, Chart, Series, StdCtrls, FR_Ctrls,
+  FR_Class, ExtCtrls, 
+{$IFDEF DelphiXE7}
+  VCLTee.TeeProcs, VCLTee.TeEngine, VCLTee.Chart, VCLTee.Series,
+{$ELSE}
+  TeeProcs, TeEngine, Chart, Series,
+{$ENDIF}
+  StdCtrls, FR_Ctrls,
   ComCtrls, Menus;
 
 type
@@ -169,8 +175,13 @@ var
       s := Copy(s, 2, 255);           // trim all non-digit chars at the begin
     while (Length(s) > 0) and not (s[Length(s)] in ['0'..'9']) do
       s := Copy(s, 1, Length(s) - 1); // trim all non-digit chars at the end
+{$IFDEF DelphiXE7}
+    while Pos(FormatSettings.ThousandSeparator, s) <> 0 do
+      Delete(s, Pos(FormatSettings.ThousandSeparator, s), 1);
+{$ELSE}
     while Pos(ThousandSeparator, s) <> 0 do
       Delete(s, Pos(ThousandSeparator, s), 1);
+{$ENDIF}
     Result := 0;
     try
       Result := StrToFloat(s);

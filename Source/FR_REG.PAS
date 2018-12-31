@@ -21,11 +21,15 @@ implementation
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+{$IFDEF DelphiXE7}
+  DesignIntf, DesignEditors,
+{$ELSE}
   {$IFNDEF Delphi6}
     DsgnIntf,
   {$ELSE}
     DesignIntf, DesignEditors, DesignWindows, DsnConst,
   {$ENDIF}
+{$ENDIF}
   Dialogs, FR_Class, FR_DSet, FR_DBSet,
   FR_OLE, FR_Rich, FR_ChBox, FR_Shape, FR_BarC, FR_RRect,
   FR_Desgn, FR_View, FR_Dock, FR_Ctrls, FR_DBOp,

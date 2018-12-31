@@ -772,6 +772,7 @@ implementation
 
 uses
   FR_Fmted, FR_Prntr, FR_Progr, FR_Utils, FR_Const
+  {$IFDEF DelphiXE7}, Variants {$ENDIF}
   {$IFDEF JPEG}, JPEG {$ENDIF};
 
 {$R FR_Lng1.RES}
@@ -978,7 +979,11 @@ begin
   FrameWidth := 1;
   FrameColor := clBlack;
   FillColor := clNone;
+{$IFDEF DelphiXE7}
+  Format := 2*256 + Ord(FormatSettings.DecimalSeparator);
+{$ELSE}
   Format := 2*256 + Ord(DecimalSeparator);
+{$ENDIF}
   BaseName := 'View';
   Visible := True;
   StreamMode := smDesigning;
@@ -1761,7 +1766,11 @@ var
           {$IFDEF VER150}
             GetCharacterPlacement(Canvas.Handle, PChar(str), Length(str), nw, GCP, GCP_JUSTIFY + GCP_MAXEXTENT)
           {$ELSE}
+            {$IFDEF DelphiXE7}
+            GetCharacterPlacement(Canvas.Handle, PChar(str), Length(str), nw, GCP, GCP_JUSTIFY + GCP_MAXEXTENT)
+            {$ELSE}
             GetCharacterPlacement(Canvas.Handle, PChar(str), BOOL(Length(str)), BOOL(nw), GCP, GCP_JUSTIFY + GCP_MAXEXTENT)
+            {$ENDIF}
           {$ENDIF}
         {$ENDIF}
           else
@@ -5687,7 +5696,11 @@ begin
     Result := ' ';
     Exit;
   end;
+{$IFDEF DelphiXE7}
+  c := FormatSettings.DecimalSeparator;
+{$ELSE}
   c := DecimalSeparator;
+{$ENDIF}
   f1 := (Format div $01000000) and $0F;
   f2 := (Format div $00010000) and $FF;
   try
@@ -5695,7 +5708,11 @@ begin
       0: Result := v;
       1:
         begin
+{$IFDEF DelphiXE7}
+          FormatSettings.DecimalSeparator := Chr(Format and $FF);
+{$ELSE}
           DecimalSeparator := Chr(Format and $FF);
+{$ENDIF}
           case f2 of
             0: Result := FormatFloat('###.##', v);
             1: Result := FloatToStrF(v, ffFixed, 15, (Format div $0100) and $FF);
@@ -5723,7 +5740,11 @@ begin
   except
     on exception do Result := v;
   end;
+{$IFDEF DelphiXE7}
+  FormatSettings.DecimalSeparator := c;
+{$ELSE}
   DecimalSeparator := c;
+{$ENDIF}
 end;
 
 procedure TfrReport.GetVariableValue(const s: String; var v: Variant);

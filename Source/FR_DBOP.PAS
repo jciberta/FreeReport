@@ -61,7 +61,9 @@ implementation
 
 uses CommDlg, Dlgs, DB
 {$IFDEF BDE}
+{$IFNDEF DelphiXE7}
 , DBTables
+{$ENDIF}
 {$ENDIF};
 
 var
@@ -78,7 +80,11 @@ begin
     0, 0, SWP_NOACTIVATE or SWP_NOSIZE or SWP_NOZORDER);
 end;
 
+{$IFDEF DelphiXE7}
+function ExplorerHook(Wnd: HWnd; Msg: UINT; WParam: WPARAM; LParam: LPARAM): UINT_PTR; stdcall;
+{$ELSE}
 function ExplorerHook(Wnd: HWnd; Msg: UINT; WParam: WPARAM; LParam: LPARAM): UINT; stdcall;
+{$ENDIF}
 var
   s: String[255];
   i: Integer;
@@ -96,7 +102,11 @@ begin
         end;
       CDN_FOLDERCHANGE:
         begin
+{$IFDEF DelphiXE7}
+          s[0] := AnsiChar(Chr(GetCurrentDirectory(255, PWideChar(@s[1]))));
+{$ELSE}
           s[0] := Chr(GetCurrentDirectory(255, @s[1]));
+{$ENDIF}
           b := True;
           with OpenDBDialog.FComboBox do
           begin

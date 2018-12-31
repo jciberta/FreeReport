@@ -59,6 +59,9 @@ implementation
 {$IFDEF Delphi6}
   uses Variants;
 {$ENDIF}
+{$IFDEF DelphiXE7}
+  uses Variants;
+{$ENDIF}
 
 type
   TCharArray = Array[0..31999] of Char;
@@ -116,7 +119,11 @@ begin
     end;
   GetMem(p, SizeOf(TVariable));
   FillChar(p^, SizeOf(TVariable), 0);
+{$IFDEF DelphiXE7}
+  p^.Name := PUnicodeString(NewStr(Name));
+{$ELSE}
   p^.Name := NewStr(Name);
+{$ENDIF}
   p^.Value := Value;
   FList.Add(p);
 end;
@@ -178,7 +185,11 @@ var
 begin
   if (Index < 0) or (Index >= FList.Count) then Exit;
   p := FList[Index];
+{$IFDEF DelphiXE7}
+  DisposeStr(PAnsiString(p^.Name));
+{$ELSE}
   DisposeStr(p^.Name);
+{$ENDIF}
   p^.Value := 0;
   FreeMem(p, SizeOf(TVariable));
   FList.Delete(Index);

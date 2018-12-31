@@ -70,6 +70,8 @@ Todo (missing features)
 
 interface
 
+{$I FR.inc}
+
 uses
         Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs;
 
@@ -171,6 +173,15 @@ type
 
 implementation
 
+{$IFDEF DelphiXE7}
+function ArrayToString(const a: array of Char): string;
+begin
+  if Length(a)>0 then
+    SetString(Result, PChar(@a[0]), Length(a))
+  else
+    Result := '';
+end;
+{$ENDIF}
 
 {
         converts a string from '321' to the internal representation '715'
@@ -724,7 +735,11 @@ var
 begin
         checksum := 0;
         // Startcode
+{$IFDEF DelphiXE7}
+        result := ArrayToString(tabelle_39[FindIdx('*')].data) + '0';
+{$ELSE}
         result := tabelle_39[FindIdx('*')].data + '0';
+{$ENDIF}
 
         for i:=1 to Length(FText) do
         begin
@@ -1281,7 +1296,11 @@ end;
 var
         i, idx : integer;
 begin
+{$IFDEF DelphiXE7}
+        result := ArrayToString(tabelle_cb[Find_Codabar('A')].data) + '0';
+{$ELSE}
         result := tabelle_cb[Find_Codabar('A')].data + '0';
+{$ENDIF}
         for i:=1 to Length(FText) do
         begin
                 idx := Find_Codabar(FText[i]);

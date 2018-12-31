@@ -174,7 +174,11 @@ begin
             if s1[1] in ['0'..'9', '.', ','] then
             begin
               for i1 := 1 to Length(s1) do
+{$IFDEF DelphiXE7}
+                if s1[i1] in ['.', ','] then s1[i1] := FormatSettings.DecimalSeparator;
+{$ELSE}
                 if s1[i1] in ['.', ','] then s1[i1] := DecimalSeparator;
+{$ENDIF}
               nm[st] := StrToFloat(s1);
             end
             else

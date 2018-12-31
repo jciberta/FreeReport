@@ -66,6 +66,11 @@
   {$WARN UNSAFE_CODE OFF}
 {$ENDIF}
 
+{$IFDEF VER280}     // RAD Studio XE7
+    {$DEFINE Delphi21}
+    {$DEFINE DelphiXE7}
+{$ENDIF VER280}
+
 {$IFDEF VER93}       // Borland C++ Builder 1.0
   {$DEFINE Delphi2}
 {$ENDIF}
@@ -99,7 +104,7 @@
  {$ENDIF}
 {$ENDIF}
 
-{$DEFINE BDE}
+//{$DEFINE BDE}
 
 //{$DEFINE FREEREP2217READ}
 
@@ -118,7 +123,7 @@
 // JPEG images - only available in Delphi 3 and above.
 // If you want to show jpeg images in "Picture" object, uncomment
 // the following line:
-//{$DEFINE JPEG}
+{$DEFINE JPEG}
 
 //------------------- RX Rich 2.0 -----------------------------------
 // RX RichEdit 2.0. You should install RX Library (2.60 or above) first.
@@ -135,7 +140,7 @@
 
 //------------------- ActiveX Data Objects (ADO) components ---------
 // Allows using any DB's in data manager with no BDE required.
-//{$DEFINE ADO}
+{$DEFINE ADO}
 
 //------------------- Script editor with syntax highlightning -------
 // To use syntax highlightning in script editor, you should install
