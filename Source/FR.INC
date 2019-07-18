@@ -77,7 +77,7 @@
     {$DEFINE Delphi10.2}
     {$DEFINE DelphiXE7_UP}
     {$DEFINE Delphi10.2_UP}
-{$ENDIF VER280}
+{$ENDIF VER320}
 
 
 
