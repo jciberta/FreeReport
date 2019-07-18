@@ -69,7 +69,18 @@
 {$IFDEF VER280}     // RAD Studio XE7
     {$DEFINE Delphi21}
     {$DEFINE DelphiXE7}
+    {$DEFINE DelphiXE7_UP}
 {$ENDIF VER280}
+
+{$IFDEF VER320}     // RAD Studio 10.2 Tokyo
+    {$DEFINE Delphi25}
+    {$DEFINE Delphi10.2}
+    {$DEFINE DelphiXE7_UP}
+    {$DEFINE Delphi10.2_UP}
+{$ENDIF VER280}
+
+
+
 
 {$IFDEF VER93}       // Borland C++ Builder 1.0
   {$DEFINE Delphi2}

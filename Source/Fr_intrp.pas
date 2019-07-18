@@ -59,7 +59,7 @@ implementation
 {$IFDEF Delphi6}
   uses Variants;
 {$ENDIF}
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   uses Variants;
 {$ENDIF}
 
@@ -119,7 +119,7 @@ begin
     end;
   GetMem(p, SizeOf(TVariable));
   FillChar(p^, SizeOf(TVariable), 0);
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   p^.Name := PUnicodeString(NewStr(Name));
 {$ELSE}
   p^.Name := NewStr(Name);
@@ -185,7 +185,7 @@ var
 begin
   if (Index < 0) or (Index >= FList.Count) then Exit;
   p := FList[Index];
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   DisposeStr(PAnsiString(p^.Name));
 {$ELSE}
   DisposeStr(p^.Name);

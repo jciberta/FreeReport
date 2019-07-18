@@ -79,7 +79,7 @@ var
   s: String;
   b: Byte;
   n: Word;
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   j: Integer;
 {$ENDIF}
 begin
@@ -89,7 +89,7 @@ begin
     repeat
       Stream.Read(n, 2);
       SetLength(s, n);
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
       for j := 1 to n do
         Stream.Read(s[j], 2);
 {$ELSE}
@@ -104,7 +104,7 @@ end;
 
 procedure frWriteMemo(Stream: TStream; l: TStrings);
 var
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   j: Integer;
 {$ENDIF}
   s: String;
@@ -119,7 +119,7 @@ begin
     s := l[i];
     n := Length(s);
     Stream.Write(n, 2);
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
     for j := 1 to n do
       Stream.Write(s[j], 2);
 {$ELSE}

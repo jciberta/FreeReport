@@ -173,7 +173,7 @@ type
 
 implementation
 
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
 function ArrayToString(const a: array of Char): string;
 begin
   if Length(a)>0 then
@@ -735,7 +735,7 @@ var
 begin
         checksum := 0;
         // Startcode
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
         result := ArrayToString(tabelle_39[FindIdx('*')].data) + '0';
 {$ELSE}
         result := tabelle_39[FindIdx('*')].data + '0';
@@ -1296,7 +1296,7 @@ end;
 var
         i, idx : integer;
 begin
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
         result := ArrayToString(tabelle_cb[Find_Codabar('A')].data) + '0';
 {$ELSE}
         result := tabelle_cb[Find_Codabar('A')].data + '0';

@@ -28,7 +28,7 @@ type
   TfrBookmark =
 {$IFDEF IBO} type string;
 {$ELSE}
-    {$IFDEF DelphiXE7}
+    {$IFDEF DelphiXE7_UP}
         TBookmark;
     {$ELSE}
         type TBookmark;

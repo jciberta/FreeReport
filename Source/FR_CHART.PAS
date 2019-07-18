@@ -17,8 +17,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FR_Class, ExtCtrls, 
-{$IFDEF DelphiXE7}
-  VCLTee.TeeProcs, VCLTee.TeEngine, VCLTee.Chart, VCLTee.Series,
+{$IFDEF DelphiXE7_UP}
+  VCLTee.TeeProcs, VCLTee.TeEngine, VCLTee.Chart, VCLTee.Series, VclTee.TeeGDIPlus,
 {$ELSE}
   TeeProcs, TeEngine, Chart, Series,
 {$ENDIF}
@@ -175,7 +175,7 @@ var
       s := Copy(s, 2, 255);           // trim all non-digit chars at the begin
     while (Length(s) > 0) and not (s[Length(s)] in ['0'..'9']) do
       s := Copy(s, 1, Length(s) - 1); // trim all non-digit chars at the end
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
     while Pos(FormatSettings.ThousandSeparator, s) <> 0 do
       Delete(s, Pos(FormatSettings.ThousandSeparator, s), 1);
 {$ELSE}

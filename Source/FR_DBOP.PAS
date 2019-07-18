@@ -61,7 +61,7 @@ implementation
 
 uses CommDlg, Dlgs, DB
 {$IFDEF BDE}
-{$IFNDEF DelphiXE7}
+{$IFNDEF DelphiXE7_UP}
 , DBTables
 {$ENDIF}
 {$ENDIF};
@@ -80,7 +80,7 @@ begin
     0, 0, SWP_NOACTIVATE or SWP_NOSIZE or SWP_NOZORDER);
 end;
 
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
 function ExplorerHook(Wnd: HWnd; Msg: UINT; WParam: WPARAM; LParam: LPARAM): UINT_PTR; stdcall;
 {$ELSE}
 function ExplorerHook(Wnd: HWnd; Msg: UINT; WParam: WPARAM; LParam: LPARAM): UINT; stdcall;
@@ -102,7 +102,7 @@ begin
         end;
       CDN_FOLDERCHANGE:
         begin
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
           s[0] := AnsiChar(Chr(GetCurrentDirectory(255, PWideChar(@s[1]))));
 {$ELSE}
           s[0] := Chr(GetCurrentDirectory(255, @s[1]));

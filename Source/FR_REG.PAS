@@ -21,7 +21,7 @@ implementation
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   DesignIntf, DesignEditors,
 {$ELSE}
   {$IFNDEF Delphi6}

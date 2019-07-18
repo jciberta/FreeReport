@@ -772,7 +772,7 @@ implementation
 
 uses
   FR_Fmted, FR_Prntr, FR_Progr, FR_Utils, FR_Const
-  {$IFDEF DelphiXE7}, Variants {$ENDIF}
+  {$IFDEF DelphiXE7_UP}, Variants {$ENDIF}
   {$IFDEF JPEG}, JPEG {$ENDIF};
 
 {$R FR_Lng1.RES}
@@ -979,7 +979,7 @@ begin
   FrameWidth := 1;
   FrameColor := clBlack;
   FillColor := clNone;
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   Format := 2*256 + Ord(FormatSettings.DecimalSeparator);
 {$ELSE}
   Format := 2*256 + Ord(DecimalSeparator);
@@ -1766,7 +1766,7 @@ var
           {$IFDEF VER150}
             GetCharacterPlacement(Canvas.Handle, PChar(str), Length(str), nw, GCP, GCP_JUSTIFY + GCP_MAXEXTENT)
           {$ELSE}
-            {$IFDEF DelphiXE7}
+            {$IFDEF DelphiXE7_UP}
             GetCharacterPlacement(Canvas.Handle, PChar(str), Length(str), nw, GCP, GCP_JUSTIFY + GCP_MAXEXTENT)
             {$ELSE}
             GetCharacterPlacement(Canvas.Handle, PChar(str), BOOL(Length(str)), BOOL(nw), GCP, GCP_JUSTIFY + GCP_MAXEXTENT)
@@ -5696,7 +5696,7 @@ begin
     Result := ' ';
     Exit;
   end;
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   c := FormatSettings.DecimalSeparator;
 {$ELSE}
   c := DecimalSeparator;
@@ -5708,7 +5708,7 @@ begin
       0: Result := v;
       1:
         begin
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
           FormatSettings.DecimalSeparator := Chr(Format and $FF);
 {$ELSE}
           DecimalSeparator := Chr(Format and $FF);
@@ -5740,7 +5740,7 @@ begin
   except
     on exception do Result := v;
   end;
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
   FormatSettings.DecimalSeparator := c;
 {$ELSE}
   DecimalSeparator := c;

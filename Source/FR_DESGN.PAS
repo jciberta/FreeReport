@@ -2813,7 +2813,7 @@ begin
            s := E1.Text;
            for j := 1 to Length(s) do
              if s[j] in ['.', ','] then
-{$IFDEF DelphiXE7}
+{$IFDEF DelphiXE7_UP}
                s[j] := FormatSettings.DecimalSeparator;
 {$ELSE}
                s[j] := DecimalSeparator;
